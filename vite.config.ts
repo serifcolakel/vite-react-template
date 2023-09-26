@@ -1,5 +1,4 @@
 /* eslint-disable import/no-extraneous-dependencies */
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
 import dts from 'vite-plugin-dts';
