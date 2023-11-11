@@ -17,8 +17,9 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['react', '@typescript-eslint', 'prettier'],
+  plugins: ['react', '@typescript-eslint', 'prettier', 'simple-import-sort'],
   rules: {
+    'simple-import-sort/exports': 'error',
     'react/react-in-jsx-scope': 'off',
     'react/jsx-uses-react': 'off',
     'react/jsx-props-no-spreading': 'off',
@@ -72,4 +73,45 @@ module.exports = {
     // ? https://eslint.org/docs/rules/no-else-return
     '@typescript-eslint/explicit-function-return-type': 'off',
   },
-}
+  overrides: [
+    {
+      files: ['*.js', '*.jsx', '*.ts', '*.tsx'],
+      rules: {
+        'simple-import-sort/imports': [
+          'error',
+          {
+            groups: [
+              // Packages `react` related packages come first.
+              ['^react', '^\\w', '^@hookform', '^@radix-ui', '^@tanstack'],
+              // npm packages
+              // Anything that starts with a letter (or digit or underscore), or `@` followed by a letter.
+              // ['^\\w'],
+              // Internal packages.
+              ['^@store(/.*|$)'],
+              ['^@components(/.*|$)'],
+              ['^@ui(/.*|$)'],
+              ['^@lib(/.*|$)'],
+              ['^@pages(/.*|$)'],
+              ['^@routes(/.*|$)'],
+              ['^@layouts(/.*|$)'],
+              ['^@utils(/.*|$)'],
+              ['^@assets(/.*|$)'],
+              ['^@helpers(/.*|$)'],
+              ['^@hooks(/.*|$)'],
+              ['^@providers(/.*|$)'],
+              ['^@services(/.*|$)'],
+              // Side effect imports.
+              ['^\\u0000'],
+              // Parent imports. Put `..` last.
+              ['^\\.\\.(?!/?$)', '^\\.\\./?$'],
+              // Other relative imports. Put same-folder imports and `.` last.
+              ['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'],
+              // Style imports.
+              ['^.+\\.?(css)$'],
+            ],
+          },
+        ],
+      },
+    },
+  ],
+};
