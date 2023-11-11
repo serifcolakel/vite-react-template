@@ -82,7 +82,7 @@ module.exports = {
           {
             groups: [
               // Packages `react` related packages come first.
-              ['^react', '^\\w', '^@hookform', '^@radix-ui', '^@tanstack'],
+              ['^react', '^\\w', '^@hookform', '^@radix-ui', '^@tanstack', '@loadable/component', '^@'],
               // npm packages
               // Anything that starts with a letter (or digit or underscore), or `@` followed by a letter.
               // ['^\\w'],
