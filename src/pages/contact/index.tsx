@@ -98,13 +98,21 @@ export default function ContactPage() {
             value={state.message}
           />
         </div>
-        <button
-          className="bg-orange-500 text-white rounded-md p-2 disabled:opacity-50 disabled:cursor-not-allowed mr-0 ml-auto"
-          disabled={!canSubmit}
-          type="submit"
-        >
-          Submit
-        </button>
+        <div className="flex flex-row justify-between gap-x-2 items-center">
+          <div
+            className={`w-4 h-4 rounded-full ${
+              isDirty ? 'bg-red-500' : 'bg-green-500'
+            }`}
+          />
+          <p>{isDirty ? 'Form is dirty' : 'Form is clean'}</p>
+          <button
+            className="bg-orange-500 text-white rounded-md p-2 disabled:opacity-50 disabled:cursor-not-allowed mr-0 ml-auto"
+            disabled={!canSubmit}
+            type="submit"
+          >
+            Submit
+          </button>
+        </div>
       </form>
     </div>
   );
